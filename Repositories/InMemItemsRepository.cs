@@ -5,7 +5,7 @@ using Catalog.Entities;
 
 namespace Catalog.Repositories
 {
-    public class InMemItemsRepository
+    public class InMemItemsRepository : IItemsRepository
     {
         private readonly List<Item> items = new()
         {
@@ -29,7 +29,7 @@ namespace Catalog.Repositories
                 Name = "Bronze Shield",
                 Price = 18,
                 CreatedAt = DateTimeOffset.UtcNow
-            },   
+            },
         };
 
         public IEnumerable<Item> GetItems()

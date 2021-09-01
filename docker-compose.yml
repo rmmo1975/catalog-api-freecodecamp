@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  catalog_dev:
+    image: mongo:latest
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=catalog
+    ports:
+      - 27017:27017
+    volumes: 
+      - ./db-data:/var/lib/mongodb/catalog-api-freecodecamp
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo 172.23.0.1:27017/catalog_dev --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 5

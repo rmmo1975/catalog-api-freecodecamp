@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=catalog
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=localP4ssw0rd
     ports:
       - 27017:27017
     volumes: 

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: catalog
-          image: julioc/catalog:v1
+          image: orogerio/catalog:v1
           resources:
             limits:
               memory: "128Mi"
@@ -30,11 +30,11 @@ spec:
                   key: mongodb-password
           livenessProbe:
             httpGet:
-              path: /health/live
+              path: /health-check/live
               port: 80
           readinessProbe:
             httpGet:
-              path: /health/heady
+              path: /health-check/ready
               port: 80
 
 ---
@@ -45,8 +45,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: myapp
+    app: catalog
   ports:
-  - port: <Port>
-    targetPort: <Target Port>
-
+    - port: 80
+      targetPort: 80

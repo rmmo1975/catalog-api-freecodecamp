@@ -58,3 +58,6 @@ If you created the image, you can see the catalog in the list and now we need to
 
 Now, it's time to push it to docker!
 -> docker push orogerio/catalog:v1
+
+
+kubectl create secret generic catalog-secrets --from-literal=mongodb-password='localP4ssw0rd'

@@ -6,8 +6,7 @@ spec:
   selector:
     matchLabels:
       app: mongodb
-  serviceName: mongo-service
-  replicas: 1
+  serviceName: mongodb-service
   template:
     metadata:
       labels:
@@ -23,8 +22,10 @@ spec:
               memory: "128Mi"
               cpu: "500m"
           env:
+            - name: MONGO_INITDB_DATABASE
+              value: catalog
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: "root"
+              value: root
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -47,9 +48,12 @@ kind: Service
 metadata:
   name: mongodb-service
 spec:
-  clusterIP: None
+  clusterIP: none
   selector:
     app: mongodb
   ports:
-  - port: 27017
-    targetPort: 27017
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+      nodePort: 32017
+  type: NodePort
